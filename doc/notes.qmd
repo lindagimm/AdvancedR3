@@ -16,8 +16,17 @@ includes both content and the output of embedded code. You can embed
 code like this:
 
 ```{r}
-### styler is a built in dependency as we almost only use it in the console. Since it is built in we use 'suggest' to run styler. If you want to style everything then run styler::style_dir(). For R markdown we change canonical visual mode markdown to "true" and automatic text wrapping to "column" which by default has 72.
+ 
 ```
+
+styler is a built in dependency as we almost only use it in the console.
+Since it is built in we use 'suggest' to run styler. If you want to
+style everything then run styler::style_dir(). For R markdown we change
+canonical visual mode markdown to "true" and automatic text wrapping to
+"column" which by default has 72. in your Descriptions file you will
+have Imports for built in dependencies, "suggests" for workflow
+dependencies and "Depends" for something like tidyverse that includes
+multiple packages and functions.
 
 Each R script is split up into sections (e.g. with RStudio's 'Insert
 Section' with Ctrl-Shift-R) by utility or purpose. You can use the
