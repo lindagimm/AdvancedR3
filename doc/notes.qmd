@@ -6,15 +6,22 @@ editor: visual
 
 ## Quarto
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+Quarto enables you to weave together content and executable code into a
+finished document. To learn more about Quarto see <https://quarto.org>.
 
 ## Running Code
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+When you click the **Render** button a document will be generated that
+includes both content and the output of embedded code. You can embed
+code like this:
 
 ```{r}
-### styler is a built in dependency as we almost only use it in the console.
+### styler is a built in dependency as we almost only use it in the console. Since it is built in we use 'suggest' to run styler. If you want to style everything then run styler::style_dir(). For R markdown we change canonical visual mode markdown to "true" and automatic text wrapping to "column" which by default has 72.
 ```
+
+Each R script is split up into sections (e.g. with RStudio's 'Insert
+Section' with Ctrl-Shift-R) by utility or purpose. You can use the
+'Document Outline' (Ctrl-Shift-O) to see the sections and functions.
 
 You can add options to executable code like this
 
@@ -23,4 +30,5 @@ You can add options to executable code like this
 2 * 2
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+The `echo: false` option disables the printing of code (only output is
+displayed).
