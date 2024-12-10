@@ -23,6 +23,16 @@ Each R script is split up into sections (e.g. with RStudio's 'Insert
 Section' with Ctrl-Shift-R) by utility or purpose. You can use the
 'Document Outline' (Ctrl-Shift-O) to see the sections and functions.
 
+\
+Code used in session 1:
+
+usethis::use_package("stringr") usethis::use_package("readxl")
+usethis::use_package("dplyr") usethis::use_package("tidyr")
+usethis::use_package("snakecase") usethis::use_package("here")
+usethis::use_package("fs") usethis::use_package("readr")
+usethis::use_usethis() use_package("usethis", "suggests")
+use_package("styler", "suggests") styler::style_dir()
+
 You can add options to executable code like this
 
 ```{r}
