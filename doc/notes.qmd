@@ -42,6 +42,16 @@ usethis::use_package("fs") usethis::use_package("readr")
 usethis::use_usethis() use_package("usethis", "suggests")
 use_package("styler", "suggests") styler::style_dir()
 
+Session 2:
+
+-   use control + alt + i to insert a code chunk or use the palette
+
+-   across: given these columns do this action
+
+-   use control + shit + M to insert pipe
+
+-   .x is a placeholder
+
 You can add options to executable code like this
 
 ```{r}
