@@ -74,7 +74,7 @@ metabolites_to_wider <-
 
 
 
-#' Title
+#' Column to metabolite
 #'
 #' @param data lipidomics
 #' @param metabolite_variable column of metabolite variable
@@ -95,5 +95,38 @@ create_recipe_spec <-
         ) |>
             recipes::step_normalize(tidyselect::starts_with("metabolite_"))
     }
+
+
+
+#' Create workflow object of the model and transformations
+#'
+#' @param model_specs
+#' @param recipe_specs
+#'
+#' @return a workflow object
+
+create_model_workflow <- function(model_specs, recipe_specs) {
+    workflows::workflow() |>
+        workflows::add_model(model_specs) |>
+        workflows::add_recipe(recipe_specs)
+}
+
+
+
+#' Create a tidy output of the model results.
+#'
+#' @param workflow_fitted_model The model workflow object that has been fitted.
+#'
+#' @return A data frame
+#'
+
+tidy_model_output <- function(workflow_fitted_model) {
+
+    workflow_fitted_model |>
+        workflows::extract_fit_parsnip() |>
+        broom::tidy(exponentiate = TRUE)
+}
+
+
 
 
