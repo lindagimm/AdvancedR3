@@ -52,3 +52,48 @@ column_values_to_snake_case <-
         snakecase::to_snake_case
       ))
   }
+
+
+#' Function to make metabolits into pivot wider
+#'
+#' @param data
+#'
+#' @return a dataframe
+
+metabolites_to_wider <-
+    function(data) {
+        data |>
+            tidyr::pivot_wider(
+                names_from = metabolite,
+                values_from = value,
+                values_fn = mean,
+                names_prefix = "metabolite_"
+            )
+    }
+
+
+
+
+#' Title
+#'
+#' @param data lipidomics
+#' @param metabolite_variable column of metabolite variable
+#'
+#' @return data frame
+
+
+create_recipe_spec <-
+    function(data, metabolite_variable) {
+        recipes::recipe(data) |>
+            recipes::update_role(
+                {{metabolite_variable}},
+                age,
+                gender,
+                new_role = "predictor" ) |>
+        recipes::update_role(
+            class, new_role = "outcome"
+        ) |>
+            recipes::step_normalize(tidyselect::starts_with("metabolite_"))
+    }
+
+

@@ -37,17 +37,17 @@ log_reg_specs
 ```
 
 ```{r}
-lipidomics |>
- column_values_to_snake_case(metabolite) |>
-  pivot_wider(
-    names_from = metabolite, values_from = value,
-    values_fn = mean,
-    names_prefix = "metabolite_"
-  )
+lipidomics_wide <- lipidomics |> 
+    column_values_to_snake_case(metabolite) |> 
+    metabolites_to_wider()
+
+lipidomics_wide
 ```
 
 ```{r}
+recipe_specs <- lipidomics_wide |> 
+    create_recipe_spec(metabolite_cholesterol)
 
-lipidomics |> 
-    column_values_to_snake_case(metabolite)
+recipe_specs
+
 ```
