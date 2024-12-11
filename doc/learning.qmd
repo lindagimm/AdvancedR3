@@ -36,11 +36,7 @@ descriptive_stats <- function(data) {
 ## Figure outputs
 
 ```{r}
-metabolite_distribution_plot <- ggplot(lipidomics, aes(x = value)) + 
-    geom_histogram() + 
-    facet_wrap(vars(metabolite), scale = "free")
-
-
+plot_distributions(lipidomics)
 ```
 
 ```{r}
