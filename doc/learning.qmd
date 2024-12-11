@@ -50,4 +50,11 @@ recipe_specs <- lipidomics_wide |>
 
 recipe_specs
 
+
+```
+
+```{r}
+workflow() |> 
+    add_model(log_reg_specs) |> 
+    add_recipe(recipe_specs)
 ```
