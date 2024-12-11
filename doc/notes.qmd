@@ -82,6 +82,9 @@ Session 2:
     targets::tar_outdated()
     ```
 
+    -   facet_wrap(vars(metabolite)) will split up the histogram by
+        metabolite
+
 You can add options to executable code like this
 
 ```{r}

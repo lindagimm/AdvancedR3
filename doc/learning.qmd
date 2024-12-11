@@ -32,3 +32,28 @@ descriptive_stats <- function(data) {
     dplyr::mutate(dplyr::across(tidyselect::where(is.numeric), ~ round(.x, digits = 1)))
 }
 ```
+
+## Figure outputs
+
+```{r}
+metabolite_distribution_plot <- ggplot(lipidomics, aes(x = value)) + 
+    geom_histogram() + 
+    facet_wrap(vars(metabolite), scale = "free")
+
+
+```
+
+```{r}
+#' Plot distribution function
+#'
+#' @param data 
+#'
+#' @return Plots on metabolite distribution
+#'
+plot_distributions <- function(data) {
+    data |> 
+        ggplot2::ggplot(ggplot2::aes(x = value)) +
+        ggplot2::geom_histogram() +
+        ggplot2::facet_wrap(ggplot2::vars(metabolite), scale = "free")
+}
+```
