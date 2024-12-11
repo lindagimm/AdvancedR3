@@ -75,6 +75,13 @@ Session 2:
     it skips to rerun df_stats_by_metabolite because the file hasn't
     changed.
 
+-   If you want to see what has changed since last time you run the
+    pipeline use. If it returns 0 no changes has been made.
+
+    ```         
+    targets::tar_outdated()
+    ```
+
 You can add options to executable code like this
 
 ```{r}
