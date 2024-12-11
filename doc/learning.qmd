@@ -4,52 +4,24 @@ author: "Your Name"
 format: html
 ---
 
-## Header 1
-
 ```{r setup}
+#| include: false
+targets::tar_config_set(store = here::here("_targets"))
 library(tidyverse)
+library(targets)
 source(here::here("R/functions.R"))
-lipidomics <- read_csv(here::here("data/lipidomics.csv"))
+lipidomics <- tar_read(lipidomics)
 ```
 
-## Basic statistics
+## Results
 
 ```{r}
-descriptive_stats(lipidomics)
-```
-
-```{r}
-#' Function for descriptice statistics
-#'
-#' @param data 
-#'
-#' @return A data.frame/Tibble
-
-descriptive_stats <- function(data) {
-  data |>
-    dplyr::group_by(metabolite) |>
-    dplyr::summarise(dplyr::across(value, list(mean = mean, sd = sd))) |>
-    dplyr::mutate(dplyr::across(tidyselect::where(is.numeric), ~ round(.x, digits = 1)))
-}
-```
-
-## Figure outputs
-
-```{r}
-plot_distributions(lipidomics)
+tar_read(df_stats_by_metabolite) |> 
+    mutate(MeanSD = glue::glue("{value_mean} ({value_sd})")) |> 
+    select(Metabolite = metabolite, `Mean SD` = MeanSD) |>  
+    knitr::kable(caption = "Descriptive statistics of the metabolites")
 ```
 
 ```{r}
-#' Plot distribution function
-#'
-#' @param data 
-#'
-#' @return Plots on metabolite distribution
-#'
-plot_distributions <- function(data) {
-    data |> 
-        ggplot2::ggplot(ggplot2::aes(x = value)) +
-        ggplot2::geom_histogram() +
-        ggplot2::facet_wrap(ggplot2::vars(metabolite), scale = "free")
-}
+tar_read(fig_metabolite_distribution)
 ```

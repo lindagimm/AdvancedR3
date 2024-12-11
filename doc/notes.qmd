@@ -60,7 +60,7 @@ Session 2:
 -   Use targets::tar_make() to run the pipeline with made targets
 
 -   There is a specific way to tell the targets function to update the
-    entire pipeline if changes are made to the data that you load in. \
+    entire pipeline if changes are made to the data that you load in.\
     Use tar_target(name = file, command = "data/lipidomics.csv", format
     = "file") to tell it that this is a file. You don't need to use
     here::here anymore because inside the targets package it already
@@ -84,6 +84,10 @@ Session 2:
 
     -   facet_wrap(vars(metabolite)) will split up the histogram by
         metabolite
+
+    -   targets::tar_config_set(store = here::here("\_targets")) This
+        tells the setup to look into the \_targets folder to look for
+        documents
 
 You can add options to executable code like this
 
