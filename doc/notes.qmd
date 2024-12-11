@@ -98,3 +98,8 @@ You can add options to executable code like this
 
 The `echo: false` option disables the printing of code (only output is
 displayed).
+
+Session 3
+
+use_package("tidymodels", "depends") \# pak::pak("tidymodels")
+use_package("parsnip") use_package("recipes") use_package("workflows")
