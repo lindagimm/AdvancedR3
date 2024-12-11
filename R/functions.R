@@ -27,8 +27,28 @@ descriptive_stats <- function(data) {
 #' @return Plots/histogram on metabolite distribution
 #'
 plot_distributions <- function(data) {
-    data |>
-        ggplot2::ggplot(ggplot2::aes(x = value)) +
-        ggplot2::geom_histogram() +
-        ggplot2::facet_wrap(ggplot2::vars(metabolite), scale = "free")
+  data |>
+    ggplot2::ggplot(ggplot2::aes(x = value)) +
+    ggplot2::geom_histogram() +
+    ggplot2::facet_wrap(ggplot2::vars(metabolite), scale = "free")
 }
+
+
+
+
+#' Function to convert a columns character values to snakecase format
+#'
+#' @param data The lipidomics dataset
+#' @param columns the columns you want to convert to snakecase
+#'
+#' @return a data frame
+
+
+column_values_to_snake_case <-
+  function(data, columns) {
+    data |>
+      dplyr::mutate(dplyr::across(
+        {{ columns }},
+        snakecase::to_snake_case
+      ))
+  }
