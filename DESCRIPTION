@@ -10,6 +10,7 @@ Imports:
     knitr,
     parsnip,
     quarto,
+    r3,
     readr,
     readxl,
     recipes,

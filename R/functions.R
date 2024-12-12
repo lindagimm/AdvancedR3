@@ -79,7 +79,7 @@ metabolites_to_wider <-
 #' @param data lipidomics
 #' @param metabolite_variable column of metabolite variable
 #'
-#' @return data frame
+#' @return recipe object
 
 
 create_recipe_spec <-

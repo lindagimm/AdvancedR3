@@ -1,9 +1,14 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|3ce7844a1c142222|||||||||||||||
+.Random.seed|object|638643c195c5fbda|||||||||||||||
+column_values_to_snake_case|function|0b1d18d3f24a5435|||||||||||||||
+create_model_workflow|function|5543b567de56ef74|||||||||||||||
+create_recipe_spec|function|2ac1a3bc952df1db|||||||||||||||
 descriptive_stats|function|812f1da84ec3b14b|||||||||||||||
 df_stats_by_metabolite|stem|8b6144c2877ce605|ce15a181d02b2e03|a4496aa6c54d9a81|519715527||t20068.4234669873s|a2f85ca40321daf5|403|rds|local|vector|||0.05||
 fig_metabolite_distribution|stem|31f71e24c9b25fb3|86673d84fb1f96ff|6808d07819deb2b8|1599393873||t20068.42346936s|93380b2e191dc9da|137189|rds|local|vector|||0.14||
 file|stem|f6bf5a5688fb274f|09442fac263aded2|2c530c1562a7fbd1|1735323524|data/lipidomics.csv|t20059.6894689554s|2ec1867e6b7db575|24313|file|local|vector|||0.01|pakke tibble blev bygget under R version 4.3.3|
 lipidomics|stem|58a989b06f163550|0adf46d83f39a429|f0e124423009cc2f|-1498393010||t20068.4234660845s|5efea0df906539e6|4884|rds|local|vector|||0.78||
+metabolites_to_wider|function|23dc6d48e297076d|||||||||||||||
 plot_distributions|function|08d4bd0c7622bd19|||||||||||||||
 quarto_doc|stem|cb407e6398a5e56f|388f14abd14602e7|c4bea2eedf12adb3|1582462002|doc/learning.html*doc/learning.qmd|t20068.4595881444s|3c42ce2167161845|24635|file|local|vector|||10.07||
+tidy_model_output|function|99603693ad824aa7|||||||||||||||
