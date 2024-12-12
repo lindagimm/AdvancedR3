@@ -61,15 +61,15 @@ column_values_to_snake_case <-
 #' @return a dataframe
 
 metabolites_to_wider <-
-    function(data) {
-        data |>
-            tidyr::pivot_wider(
-                names_from = metabolite,
-                values_from = value,
-                values_fn = mean,
-                names_prefix = "metabolite_"
-            )
-    }
+  function(data) {
+    data |>
+      tidyr::pivot_wider(
+        names_from = metabolite,
+        values_from = value,
+        values_fn = mean,
+        names_prefix = "metabolite_"
+      )
+  }
 
 
 
@@ -83,18 +83,20 @@ metabolites_to_wider <-
 
 
 create_recipe_spec <-
-    function(data, metabolite_variable) {
-        recipes::recipe(data) |>
-            recipes::update_role(
-                {{metabolite_variable}},
-                age,
-                gender,
-                new_role = "predictor" ) |>
-        recipes::update_role(
-            class, new_role = "outcome"
-        ) |>
-            recipes::step_normalize(tidyselect::starts_with("metabolite_"))
-    }
+  function(data, metabolite_variable) {
+    recipes::recipe(data) |>
+      recipes::update_role(
+        {{ metabolite_variable }},
+        age,
+        gender,
+        new_role = "predictor"
+      ) |>
+      recipes::update_role(
+        class,
+        new_role = "outcome"
+      ) |>
+      recipes::step_normalize(tidyselect::starts_with("metabolite_"))
+  }
 
 
 
@@ -106,9 +108,9 @@ create_recipe_spec <-
 #' @return a workflow object
 
 create_model_workflow <- function(model_specs, recipe_specs) {
-    workflows::workflow() |>
-        workflows::add_model(model_specs) |>
-        workflows::add_recipe(recipe_specs)
+  workflows::workflow() |>
+    workflows::add_model(model_specs) |>
+    workflows::add_recipe(recipe_specs)
 }
 
 
@@ -121,12 +123,42 @@ create_model_workflow <- function(model_specs, recipe_specs) {
 #'
 
 tidy_model_output <- function(workflow_fitted_model) {
-
-    workflow_fitted_model |>
-        workflows::extract_fit_parsnip() |>
-        broom::tidy(exponentiate = TRUE)
+  workflow_fitted_model |>
+    workflows::extract_fit_parsnip() |>
+    broom::tidy(exponentiate = TRUE)
 }
 
 
 
 
+#' Convert the long form dataset to a list of wide form dfs
+#'
+#' @param data lipidomics dataset
+#'
+#' @return a list of dataframes
+
+split_by_metabolite <- function(data) {
+  data |>
+    column_values_to_snake_case(metabolite) |>
+    dplyr::group_split(metabolite) |>
+    purrr::map(metabolites_to_wider)
+}
+
+
+
+#' Generate results of a model
+#'
+#' @param data lipidomics dataset
+#'
+#' @return a dataframe
+
+generate_model_results <- function(data) {
+  create_model_workflow(
+    parsnip::logistic_reg() |>
+      parsnip::set_engine("glm"),
+    data |>
+      create_recipe_spec(tidyselect::starts_with("metabolite_"))
+  ) |>
+    parsnip::fit(data) |>
+    tidy_model_output()
+}
